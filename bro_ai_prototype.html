@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0b1020">
+<meta name="description" content="Bro AI by SZ11 — مساعدك اليومي للتعلم والكتابة والأفكار.">
+<title>Bro AI — by SZ11</title>
+<style>
+:root{--bg:#f4f7fc;--panel:#fff;--text:#15213a;--muted:#71809b;--line:#e4eaf4;--blue:#3478f6;--blue2:#1558d6;--soft:#eaf1ff;--shadow:0 14px 40px rgba(25,54,105,.08)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",Tahoma,Arial,sans-serif;min-height:100vh}
+button,textarea,select{font:inherit}button{cursor:pointer}
+.app{display:grid;grid-template-columns:280px 1fr;min-height:100vh;max-width:1600px;margin:auto}
+.sidebar{background:var(--panel);border-left:1px solid var(--line);padding:22px 16px;display:flex;flex-direction:column;gap:20px}
+.brand{display:flex;align-items:center;gap:12px;padding:4px 7px}.logo{width:45px;height:45px;border-radius:15px;background:linear-gradient(135deg,#4388ff,#1554d1);color:white;display:grid;place-items:center;font-weight:900;font-size:20px;box-shadow:0 8px 20px #3478f633}.brand h1{font-size:19px;margin:0;letter-spacing:.2px}.brand small{color:var(--muted);display:block;margin-top:3px;font-size:11px}
+.new-chat{border:0;background:var(--blue);color:white;border-radius:12px;padding:12px 14px;font-weight:700;box-shadow:0 8px 18px #3478f626}.new-chat:hover{background:var(--blue2)}
+.side-label{color:var(--muted);font-size:12px;padding:0 9px}.history{display:flex;flex-direction:column;gap:6px}.history-item{border:0;text-align:right;background:transparent;color:var(--text);border-radius:10px;padding:10px;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.history-item:hover{background:var(--bg)}
+.sidebar-bottom{margin-top:auto;border-top:1px solid var(--line);padding-top:16px;display:grid;gap:9px}.subtle-btn{border:1px solid var(--line);background:var(--panel);color:var(--text);padding:10px 12px;border-radius:10px;text-align:right}
+.main{display:flex;flex-direction:column;min-width:0;min-height:100vh}.topbar{height:72px;display:flex;align-items:center;justify-content:space-between;padding:0 30px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--bg) 88%,transparent);gap:12px}.top-title{font-weight:750}.top-sub{font-size:12px;color:var(--muted);margin-top:3px}.top-actions{display:flex;gap:8px;align-items:center}.pill{border:1px solid var(--line);border-radius:999px;padding:8px 11px;background:var(--panel);color:var(--text);font-size:12px}
+.content{width:min(900px,100%);padding:34px 24px 22px;margin:0 auto;display:flex;flex-direction:column;flex:1}
+.welcome{text-align:center;margin:auto 0 26px;padding:20px 0 10px}.welcome-mark{width:68px;height:68px;margin:0 auto 18px;border-radius:23px;display:grid;place-items:center;color:white;font-size:28px;font-weight:900;background:linear-gradient(140deg,#4388ff,#1554d1);box-shadow:0 12px 30px #3478f633}.welcome h2{font-size:clamp(27px,4vw,39px);margin:0 0 12px;letter-spacing:-.7px}.welcome h2 span{color:var(--blue)}.welcome p{color:var(--muted);line-height:1.9;max-width:560px;margin:0 auto}
+.suggestions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:0 0 22px}.suggestion{background:var(--panel);border:1px solid var(--line);border-radius:15px;padding:15px;text-align:right;color:var(--text);transition:.18s}.suggestion:hover{border-color:#9dbdff;transform:translateY(-1px);box-shadow:var(--shadow)}.suggestion .emoji{font-size:19px;display:block;margin-bottom:8px}.suggestion strong{display:block;font-size:14px;margin-bottom:5px}.suggestion small{color:var(--muted);line-height:1.6}
+.chat{display:flex;flex-direction:column;gap:18px;margin-bottom:20px}.message{display:flex;gap:11px;align-items:flex-start;max-width:100%}.avatar{width:34px;height:34px;flex:0 0 34px;border-radius:12px;display:grid;place-items:center;font-size:12px;font-weight:800;background:var(--soft);color:var(--blue)}.message.user{flex-direction:row-reverse}.message.user .avatar{background:#dce8ff}.bubble{max-width:min(680px,calc(100% - 45px));padding:13px 16px;border:1px solid var(--line);background:var(--panel);border-radius:5px 16px 16px 16px;line-height:1.85;white-space:pre-wrap;overflow-wrap:anywhere}.message.user .bubble{background:var(--blue);border-color:var(--blue);color:#fff;border-radius:16px 5px 16px 16px}.bubble-tools{display:flex;gap:8px;margin-top:8px}.mini-btn{border:1px solid var(--line);background:var(--panel);color:var(--muted);padding:5px 9px;border-radius:8px;font-size:11px}.typing{color:var(--muted);font-size:13px}
+.composer-wrap{margin-top:auto}.composer{background:var(--panel);border:1px solid #dbe4f2;border-radius:20px;padding:12px;box-shadow:var(--shadow)}.composer textarea{width:100%;min-height:60px;max-height:180px;resize:vertical;border:0;outline:0;background:transparent;color:var(--text);padding:8px;font-size:15px;line-height:1.7}.composer-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:8px;border-top:1px solid var(--line)}.composer-note{font-size:11px;color:var(--muted)}.send{width:42px;height:42px;border:0;border-radius:13px;background:var(--blue);color:white;font-size:20px;font-weight:800}.send:disabled{opacity:.45;cursor:not-allowed}.disclaimer{text-align:center;color:var(--muted);font-size:11px;line-height:1.7;padding:12px 0 0}.footer{text-align:center;padding:12px 20px 18px;color:var(--muted);font-size:11px}.footer b{color:var(--text)}
+body.dark{--bg:#0b1020;--panel:#111a2d;--text:#edf3ff;--muted:#98a8c4;--line:#24314a;--soft:#182b50;--shadow:0 14px 40px rgba(0,0,0,.18)}
+body.dark .topbar{background:rgba(11,16,32,.86)}body.dark .suggestion:hover{border-color:#477bd4}body.dark .composer{border-color:#2b3a56}body.dark .message.user .avatar{background:#20375d}
+@media(max-width:760px){.app{grid-template-columns:1fr}.sidebar{display:none}.topbar{height:64px;padding:0 16px}.content{padding:22px 14px 14px}.welcome{margin:32px 0 24px}.welcome-mark{width:58px;height:58px;border-radius:19px}.suggestions{gap:8px}.suggestion{padding:12px}.suggestion small{font-size:11px}.composer{border-radius:17px}.top-sub{display:none}}
+@media(max-width:380px){.suggestions{grid-template-columns:1fr}.pill{padding:7px 9px}}
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand"><div class="logo">B</div><div><h1>Bro AI</h1><small>by SZ11 Technologies</small></div></div>
+    <button class="new-chat" id="newChat">＋ محادثة جديدة</button>
+    <div class="side-label">مساحة العمل</div>
+    <div class="history" id="history"><button class="history-item">👋 مرحباً بك في Bro AI</button></div>
+    <div class="sidebar-bottom">
+      <button class="subtle-btn" id="themeSide">◐ تغيير المظهر</button>
+      <button class="subtle-btn" id="aboutBtn">ⓘ حول Bro AI</button>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="top-title">Bro AI <span style="color:var(--blue)">•</span></div><div class="top-sub">مساعدك اليومي للتعلّم والإبداع</div></div>
+      <div class="top-actions"><span class="pill">نسخة تجريبية</span><button class="pill" id="themeTop" aria-label="تغيير المظهر">☾ المظهر</button></div>
+    </header>
+    <section class="content">
+      <section class="welcome" id="welcome">
+        <div class="welcome-mark">B</div>
+        <h2>أهلاً بك في <span>Bro AI</span></h2>
+        <p>مساحة واحدة للتعلّم، والكتابة، وتطوير أفكارك. اكتب سؤالك بلغتك المفضلة وابدأ من هنا.</p>
+      </section>
+      <section class="suggestions" id="suggestions">
+        <button class="suggestion" data-prompt="اشرح لي درساً دراسياً بطريقة بسيطة مع مثال."><span class="emoji">📚</span><strong>ساعدني في الدراسة</strong><small>شرح مبسّط وأمثلة خطوة بخطوة</small></button>
+        <button class="suggestion" data-prompt="ساعدني على تطوير فكرة مشروع صغير بميزانية صفر، مع خطوات واقعية."><span class="emoji">💡</span><strong>طوّر فكرة مشروع</strong><small>حوّل فكرة أولية إلى خطة عملية</small></button>
+        <button class="suggestion" data-prompt="اكتب لي مسودة نص إبداعي قصير باللغة العربية الفصحى."><span class="emoji">✍️</span><strong>اكتب شيئاً جديداً</strong><small>أفكار ومسودات ونصوص إبداعية</small></button>
+        <button class="suggestion" data-prompt="علّمني مهارة جديدة في خمس خطوات قصيرة."><span class="emoji">🧭</span><strong>تعلّم مهارة</strong><small>خطوات قصيرة يمكنك تطبيقها</small></button>
+      </section>
+      <section class="chat" id="chat" aria-live="polite"></section>
+      <div class="composer-wrap">
+        <form class="composer" id="composer">
+          <textarea id="prompt" maxlength="4000" placeholder="اكتب رسالتك هنا... (Enter للإرسال، Shift + Enter لسطر جديد)" aria-label="رسالتك" required></textarea>
+          <div class="composer-row"><span class="composer-note">نموذج واجهة أولي — لم يتم ربط الذكاء الاصطناعي بعد</span><button class="send" id="send" type="submit" aria-label="إرسال">↑</button></div>
+        </form>
+        <div class="disclaimer">قد تحتاج الإجابات المستقبلية إلى التحقق. لا تشارك كلمات المرور أو المعلومات الشخصية الحساسة.</div>
+      </div>
+    </section>
+    <footer class="footer">صُنع بطموح في المغرب · <b>SZ11</b></footer>
+  </main>
+</div>
+<script>
+const $ = (s)=>document.querySelector(s);
+const chat=$('#chat'), promptBox=$('#prompt'), welcome=$('#welcome'), suggestions=$('#suggestions');
+let conversations=[];
+function addMessage(role,text){
+ const row=document.createElement('div');row.className='message '+(role==='user'?'user':'assistant');
+ const avatar=document.createElement('div');avatar.className='avatar';avatar.textContent=role==='user'?'أنت':'B';
+ const body=document.createElement('div');body.className='message-body';
+ const bubble=document.createElement('div');bubble.className='bubble';bubble.textContent=text;body.appendChild(bubble);
+ if(role!=='user'){
+  const tools=document.createElement('div');tools.className='bubble-tools';
+  const copy=document.createElement('button');copy.className='mini-btn';copy.textContent='نسخ الإجابة';
+  copy.onclick=async()=>{try{await navigator.clipboard.writeText(text);copy.textContent='تم النسخ ✓'}catch(e){copy.textContent='تعذر النسخ'}};
+  tools.appendChild(copy);body.appendChild(tools);
+ }
+ row.append(avatar,body);chat.appendChild(row);return row;
+}
+function localDemoReply(text){
+ const t=text.toLowerCase();
+ if(/سلام|مرحبا|السلام عليكم|salam|hello|hi/.test(t))return 'وعليكم السلام! 👋 مرحباً بك في Bro AI by SZ11. أنا حالياً في النسخة التجريبية للواجهة، ولم يتم ربط نموذج ذكاء اصطناعي بعد. نقدر نختبرو طريقة عرض الرسائل، وبعدها نربط الخدمة الذكية بشكل آمن.';
+ if(/درس|تمرين|رياضيات|فيزياء|svt|study/.test(t))return 'وصلني طلبك الدراسي 📚\\n\\nهذه نسخة تجريبية من الواجهة فقط، لذلك لا أستطيع حل المسألة بذكاء اصطناعي حقيقي حتى نربط مزوداً مناسباً. أرسل سؤالك وسنستخدمه لاحقاً لاختبار الربط.';
+ if(/مشروع|فلوس|مال|ربح|business/.test(t))return 'فكرة جيدة! 💡\\n\\nفي Bro AI سنهدف إلى تقديم خطوات واقعية، مع توضيح التكاليف والمخاطر وعدم الوعد بأرباح مضمونة. هذه الرسالة توضيحية فقط لأن نموذج الذكاء الاصطناعي لم يُربط بعد.';
+ return 'تم استلام رسالتك بنجاح ✅\\n\\nهذه استجابة تجريبية محلية لتأكيد أن واجهة Bro AI تعمل. لم يتم إرسال رسالتك إلى أي خدمة خارجية، ولم يتم تشغيل نموذج ذكاء اصطناعي حقيقي بعد. الخطوة القادمة هي إعداد خادم آمن وربطه بمزود مناسب.';
+}
+function sendMessage(text){
+ text=text.trim();if(!text)return;
+ welcome.style.display='none';suggestions.style.display='none';
+ addMessage('user',text);conversations.push({role:'user',text});
+ promptBox.value='';$('#send').disabled=true;
+ const wait=addMessage('assistant','جارٍ تجهيز رد تجريبي...');
+ setTimeout(()=>{wait.querySelector('.bubble').textContent=localDemoReply(text);const b=document.createElement('div');b.className='bubble-tools';const note=document.createElement('span');note.className='typing';note.textContent='رد تجريبي — ليس مولّداً بواسطة نموذج AI';b.appendChild(note);wait.querySelector('.message-body').appendChild(b);conversations.push({role:'assistant',text:localDemoReply(text)});$('#send').disabled=false;promptBox.focus();},450);
+}
+$('#composer').addEventListener('submit',e=>{e.preventDefault();sendMessage(promptBox.value)});
+promptBox.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();$('#composer').requestSubmit()}});
+document.querySelectorAll('.suggestion').forEach(b=>b.addEventListener('click',()=>sendMessage(b.dataset.prompt)));
+function newChat(){chat.innerHTML='';welcome.style.display='';suggestions.style.display='';promptBox.value='';conversations=[];promptBox.focus()}
+$('#newChat').addEventListener('click',newChat);
+function toggleTheme(){document.body.classList.toggle('dark');const dark=document.body.classList.contains('dark');$('#themeTop').textContent=dark?'☀ المظهر':'☾ المظهر';}
+$('#themeTop').addEventListener('click',toggleTheme);$('#themeSide').addEventListener('click',toggleTheme);
+$('#aboutBtn').addEventListener('click',()=>alert('Bro AI by SZ11\\nنسخة أولية لواجهة مساعد ذكي. لا يوجد اتصال فعلي بنموذج ذكاء اصطناعي في هذه النسخة.'));
+</script>
+</body>
+</html>
